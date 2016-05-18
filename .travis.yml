@@ -3,13 +3,8 @@ language: php
 php:
  - 7.0
 
-env:
-  matrix:
-    - PREFER_LOWEST="--prefer-lowest"
-    - PREFER_LOWEST=""
-
 before_script:
- - composer update --no-interaction --prefer-source $PREFER_LOWEST
+ - composer install --no-interaction
 
 script:
  - phpunit
