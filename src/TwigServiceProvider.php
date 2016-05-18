@@ -89,6 +89,6 @@ class TwigServiceProvider implements ServiceProvider
             $posixGetuid = '';
         }
 
-        return rtrim(sys_get_temp_dir(), '/\\').'/mouftwigtemplatemain_'.$posixGetuid.str_replace(':', '', dirname(__DIR__, 4));
+        return rtrim(sys_get_temp_dir(), '/\\').'/twig_compiled_cache_'.$posixGetuid.str_replace(':', '', dirname(__DIR__, 4));
     }
 }
