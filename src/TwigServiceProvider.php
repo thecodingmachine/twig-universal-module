@@ -10,12 +10,10 @@ use Twig_Environment;
 use Twig_LoaderInterface;
 use Twig_Loader_Chain;
 use Twig_Loader_Filesystem;
-use Twig_CacheInterface;
-use Twig_Cache_Filesystem;
 
 class TwigServiceProvider implements ServiceProvider
 {
-    const NAMESPACE = 'thecodingmachine.twig-universal-module';
+    const PACKAGE = 'thecodingmachine.twig-universal-module';
 
     public function getServices()
     {
@@ -31,17 +29,18 @@ class TwigServiceProvider implements ServiceProvider
         ];
     }
 
-
     /**
-     * Returns the entry named NAMESPACE.$name, of simply $name if NAMESPACE.$name is not found.
+     * Returns the entry named PACKAGE.$name, of simply $name if PACKAGE.$name is not found.
      *
      * @param ContainerInterface $container
-     * @param string $name
+     * @param string             $name
+     *
      * @return mixed
      */
     private static function get(ContainerInterface $container, string $name, $default = null)
     {
-        $namespacedName = self::NAMESPACE.'.'.$name;
+        $namespacedName = self::PACKAGE.'.'.$name;
+
         return $container->has($namespacedName) ? $container->get($namespacedName) : ($container->has($name) ? $container->get($name) : $default);
     }
 
@@ -49,6 +48,7 @@ class TwigServiceProvider implements ServiceProvider
     {
         $environment = new Twig_Environment($container->get(\Twig_LoaderInterface::class), self::get($container, 'twig_options', []));
         $environment->setExtensions(self::get($container, 'twig_extensions', []));
+
         return $environment;
     }
 
@@ -58,7 +58,7 @@ class TwigServiceProvider implements ServiceProvider
         return [
             'debug' => self::get($container, 'DEBUG', true),
             'auto_reload' => true,
-            'cache' => self::get($container, 'twig_cache_directory')
+            'cache' => self::get($container, 'twig_cache_directory'),
         ];
     }
 
@@ -70,7 +70,7 @@ class TwigServiceProvider implements ServiceProvider
     public static function createLoadersArray(ContainerInterface $container) : array
     {
         return [
-            $container->get(Twig_Loader_Filesystem::class)
+            $container->get(Twig_Loader_Filesystem::class),
         ];
     }
 
@@ -88,6 +88,7 @@ class TwigServiceProvider implements ServiceProvider
         } else {
             $posixGetuid = '';
         }
-        return rtrim(sys_get_temp_dir(), '/\\').'/mouftwigtemplatemain_'.$posixGetuid.str_replace(":", "", dirname(__DIR__, 4));
+
+        return rtrim(sys_get_temp_dir(), '/\\').'/mouftwigtemplatemain_'.$posixGetuid.str_replace(':', '', dirname(__DIR__, 4));
     }
 }
