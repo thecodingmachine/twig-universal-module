@@ -3,9 +3,13 @@ language: php
 php:
  - 7.0
  - 7.1
+env:
+  matrix:
+  - COMPOSER_FLAGS=""
+  - COMPOSER_FLAGS="--prefer-lowest"
 
 before_script:
- - composer install --no-interaction
+ - composer install --no-interaction $COMPOSER_FLAGS
 
 script:
  - phpunit
