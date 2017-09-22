@@ -6,16 +6,17 @@ use Interop\Container\ContainerInterface;
 use Interop\Container\Factories\Alias;
 use Interop\Container\Factories\Parameter;
 use Interop\Container\ServiceProvider;
+use Interop\Container\ServiceProviderInterface;
 use Twig_Environment;
 use Twig_LoaderInterface;
 use Twig_Loader_Chain;
 use Twig_Loader_Filesystem;
 
-class TwigServiceProvider implements ServiceProvider
+class TwigServiceProvider implements ServiceProviderInterface
 {
     const PACKAGE = 'thecodingmachine.twig-universal-module';
 
-    public function getServices()
+    public function getFactories()
     {
         return [
             Twig_Environment::class => [self::class,'createTwigEnvironment'],
@@ -27,6 +28,11 @@ class TwigServiceProvider implements ServiceProvider
             'twig_directory' => new Parameter(dirname(__DIR__, 4)),
             'twig_cache_directory' => [self::class,'createTwigCacheDirectory'],
         ];
+    }
+
+    public function getExtensions()
+    {
+        return [];
     }
 
     /**
