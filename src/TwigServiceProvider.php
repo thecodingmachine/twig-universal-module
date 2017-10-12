@@ -54,6 +54,10 @@ class TwigServiceProvider implements ServiceProviderInterface
     {
         $environment = new Twig_Environment($container->get(\Twig_LoaderInterface::class), self::get($container, 'twig_options', []));
         $environment->setExtensions(self::get($container, 'twig_extensions', []));
+        $debug = self::get($container, 'DEBUG', true);
+        if ($debug) {
+            $environment->addExtension(new \Twig_Extension_Debug());
+        }
 
         return $environment;
     }
