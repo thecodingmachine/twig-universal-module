@@ -12,7 +12,7 @@
     "php": ">=7.0",
     "container-interop/service-provider": "^0.4",
     "thecodingmachine/common-factories": "^0.4.1",
-    "twig/twig": "^1 | ^2"
+    "twig/twig": "^1.35.4 | ^2.5.0"
   },
   "require-dev": {
     "mnapoli/simplex": "~0.5.0",
