@@ -8,8 +8,7 @@ class TwigServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testProvider()
     {
-        $simplex = new Container();
-        $simplex->register(new TwigServiceProvider());
+        $simplex = new Container([new TwigServiceProvider()]);
 
         $simplex['twig_directory'] = dirname(__DIR__);
 
