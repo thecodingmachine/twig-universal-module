@@ -10,8 +10,8 @@
   },
   "require": {
     "php": ">=7.0",
-    "container-interop/service-provider": "~0.4.1",
-    "thecodingmachine/common-factories": "^0.4",
+    "container-interop/service-provider": "^0.4",
+    "thecodingmachine/common-factories": "^0.4.1",
     "twig/twig": "^1 | ^2"
   },
   "require-dev": {
