@@ -2,7 +2,7 @@
 
 namespace TheCodingMachine;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Interop\Container\Factories\Alias;
 use Interop\Container\Factories\Parameter;
 use Interop\Container\ServiceProvider;
